@@ -51,7 +51,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Ejemplo de Solicitud HTTP en Flutter'),
+          title: Text(
+            'Ejemplo de Solicitud HTTP en Flutter',
+            style: TextStyle(color: Color.fromARGB(255, 191, 243, 139)), // Cambia el color del título
+          ),
         ),
         body: Center(
           child: Column(
@@ -63,12 +66,20 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  fetchData(urlController.text); // Llama a fetchData con la URL ingresada
+                  fetchData(urlController.text);
                 },
                 child: Text('Realizar Solicitud HTTP'),
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 195, 120, 180), // Cambia el color de fondo del botón
+                ),
               ),
               SizedBox(height: 20),
-              Text('Respuesta HTTP:'),
+              Text(
+                'Respuesta HTTP:',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 144, 18, 18), // Cambia el color del texto
+                ),
+              ),
               SizedBox(height: 10),
               Expanded(
                 child: SingleChildScrollView(
