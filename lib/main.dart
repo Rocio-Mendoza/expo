@@ -12,12 +12,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String responseText = ''; // Variable para almacenar la respuesta HTTP
-
-  // URL de ejemplo, puedes cambiarla a la que desees
-  final String url = 'https://thedogapi.com/';
+  TextEditingController urlController = TextEditingController(); // Controlador para el campo de entrada de URL
 
   // Función para realizar la solicitud HTTP y actualizar la respuesta
-  void fetchData() async {
+  void fetchData(String url) async {
+    if (url.isEmpty) {
+      setState(() {
+        responseText = 'Por favor, ingresa una URL válida.';
+      });
+      return;
+    }
+
     try {
       final response = await http.get(Uri.parse(url));
 
@@ -43,6 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Ejemplo de Solicitud HTTP en Flutter'),
@@ -51,14 +57,24 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              TextField(
+                controller: urlController,
+                decoration: InputDecoration(labelText: 'Ingresa la URL'),
+              ),
               ElevatedButton(
-                onPressed: fetchData,
+                onPressed: () {
+                  fetchData(urlController.text); // Llama a fetchData con la URL ingresada
+                },
                 child: Text('Realizar Solicitud HTTP'),
               ),
               SizedBox(height: 20),
               Text('Respuesta HTTP:'),
               SizedBox(height: 10),
-              Text(responseText),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(responseText),
+                ),
+              ),
             ],
           ),
         ),
