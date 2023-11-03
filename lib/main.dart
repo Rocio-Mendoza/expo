@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
               Text(
                 'Respuesta HTTP:',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 144, 18, 18), // Cambia el color del texto
+                  color: Color.fromARGB(255, 122, 8, 109), // Cambia el color del texto
                 ),
               ),
               SizedBox(height: 10),
